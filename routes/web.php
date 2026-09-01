@@ -8,6 +8,6 @@ Route::get('/', function () {
     return redirect()->route('siswa.index');
 });
 
-Route::resource('siswa', SiswaController::class)->except(['show']);
+Route::resource('siswa', SiswaController::class);
 
 Route::resource('perusahaan', PerusahaanController::class);

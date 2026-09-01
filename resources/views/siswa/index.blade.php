@@ -51,6 +51,7 @@
                         <td><span class="badge badge-{{ $s->status }}">{{ $s->status }}</span></td>
                         <td>
                             <div class="actions">
+                                <a href="{{ route('siswa.show', $s->id) }}" class="btn btn-sm">DETAIL</a>
                                 <a href="{{ route('siswa.edit', $s->id) }}" class="btn btn-sm">EDIT</a>
                                 <form action="{{ route('siswa.destroy', $s->id) }}" method="POST"
                                       onsubmit="return confirm('Hapus data {{ $s->nama }}?');">

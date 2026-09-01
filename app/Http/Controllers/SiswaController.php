@@ -39,6 +39,11 @@ class SiswaController extends Controller
             ->with('success', 'Data siswa berhasil ditambahkan.');
     }
 
+    public function show(Siswa $siswa)
+    {
+        return view('siswa.show', compact('siswa'));
+    }
+
     public function edit(Siswa $siswa)
     {
         return view('siswa.edit', compact('siswa'));
