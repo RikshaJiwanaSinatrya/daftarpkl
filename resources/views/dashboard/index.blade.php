@@ -117,11 +117,11 @@
         display: inline-block; padding: 6px 14px; transform: rotate(-2deg);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1180px) {
         .counters { grid-template-columns: repeat(2, 1fr); }
         .panels { grid-template-columns: 1fr; }
     }
-    @media (max-width: 520px) {
+    @media (max-width: 620px) {
         .counters { grid-template-columns: 1fr; }
     }
 </style>
