@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kompetensi;
 use App\Models\Siswa;
 use Illuminate\Database\Seeder;
 
@@ -85,7 +86,13 @@ class SiswaSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            Siswa::create($item);
+            $siswa = Siswa::create($item);
+
+            $kompetensi = Kompetensi::inRandomOrder()
+                ->limit(rand(2, 5))
+                ->pluck('id');
+
+            $siswa->kompetensi()->attach($kompetensi);
         }
     }
 }

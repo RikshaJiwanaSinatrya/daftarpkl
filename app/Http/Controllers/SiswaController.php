@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kompetensi;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -9,13 +10,16 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $siswa = Siswa::orderBy('created_at', 'desc')->get();
+        $siswa = Siswa::with('kompetensi')
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('siswa.index', compact('siswa'));
     }
 
     public function create()
     {
-        return view('siswa.create');
+        $kompetensi = Kompetensi::orderBy('nama_kompetensi')->get();
+        return view('siswa.create', compact('kompetensi'));
     }
 
     public function store(Request $request)
@@ -31,9 +35,13 @@ class SiswaController extends Controller
             'tanggal_selesai' => ['required', 'date', 'after_or_equal:tanggal_mulai'],
             'pembimbing' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'in:aktif,selesai,berhenti'],
+            'kompetensi' => ['required', 'array', 'min:1'],
+            'kompetensi.*' => ['exists:kompetensi,id'],
         ]);
 
-        Siswa::create($validated);
+        $siswa = Siswa::create($validated);
+
+        $siswa->kompetensi()->attach($validated['kompetensi']);
 
         return redirect()->route('siswa.index')
             ->with('success', 'Data siswa berhasil ditambahkan.');
@@ -41,12 +49,15 @@ class SiswaController extends Controller
 
     public function show(Siswa $siswa)
     {
+        $siswa->load('kompetensi');
         return view('siswa.show', compact('siswa'));
     }
 
     public function edit(Siswa $siswa)
     {
-        return view('siswa.edit', compact('siswa'));
+        $kompetensi = Kompetensi::orderBy('nama_kompetensi')->get();
+        $siswa->load('kompetensi');
+        return view('siswa.edit', compact('siswa', 'kompetensi'));
     }
 
     public function update(Request $request, Siswa $siswa)
@@ -62,9 +73,13 @@ class SiswaController extends Controller
             'tanggal_selesai' => ['required', 'date', 'after_or_equal:tanggal_mulai'],
             'pembimbing' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'in:aktif,selesai,berhenti'],
+            'kompetensi' => ['required', 'array', 'min:1'],
+            'kompetensi.*' => ['exists:kompetensi,id'],
         ]);
 
         $siswa->update($validated);
+
+        $siswa->kompetensi()->sync($validated['kompetensi']);
 
         return redirect()->route('siswa.index')
             ->with('success', 'Data siswa berhasil diperbarui.');

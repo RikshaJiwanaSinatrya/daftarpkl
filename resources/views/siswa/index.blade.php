@@ -32,6 +32,7 @@
                         <th>Kelas</th>
                         <th>Perusahaan</th>
                         <th>Bidang</th>
+                        <th>Kompetensi</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -48,6 +49,13 @@
                         <td>{{ $s->kelas }}</td>
                         <td>{{ $s->nama_perusahaan }}</td>
                         <td>{{ $s->bidang_pkl }}</td>
+                        <td>
+                            @forelse ($s->kompetensi as $kompetensi)
+                                <span class="badge badge-aktif mb-1">{{ $kompetensi->nama_kompetensi }}</span>
+                            @empty
+                                <span class="sub">Belum ada</span>
+                            @endforelse
+                        </td>
                         <td><span class="badge badge-{{ $s->status }}">{{ $s->status }}</span></td>
                         <td>
                             <div class="actions">

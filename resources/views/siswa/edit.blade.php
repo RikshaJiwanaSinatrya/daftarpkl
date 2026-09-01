@@ -78,6 +78,22 @@
                 </div>
             </div>
 
+            <div class="fgroup" style="margin-top:18px">
+                <label>Kompetensi yang Dikuasai <b>*</b></label>
+                <div class="ckgrid">
+                    @foreach ($kompetensi as $item)
+                        <div class="ck">
+                            <label>
+                                <input type="checkbox" name="kompetensi[]" value="{{ $item->id }}"
+                                       {{ $siswa->kompetensi->contains($item->id) ? 'checked' : '' }}>
+                                {{ $item->nama_kompetensi }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+                @error('kompetensi') <div class="err">{{ $message }}</div> @enderror
+            </div>
+
             <div class="factions">
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 <a href="{{ route('siswa.index') }}" class="btn">Batal</a>

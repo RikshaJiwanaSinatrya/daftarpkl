@@ -230,7 +230,7 @@
             text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
         }
         .fgroup label b { color: var(--red); }
-        .fgroup input, .fgroup select {
+        .fgroup input, .fgroup select, .fgroup textarea {
             width: 100%;
             font-family: "Space Mono", monospace;
             font-size: 15px;
@@ -242,14 +242,23 @@
             outline: none;
             transition: box-shadow .06s ease;
         }
-        .fgroup input:focus, .fgroup select:focus {
+        .fgroup textarea { resize: vertical; }
+        .fgroup input:focus, .fgroup select:focus, .fgroup textarea:focus {
             box-shadow: 4px 4px 0 var(--blue);
             border-color: var(--ink);
         }
-        .fgroup input.error, .fgroup select.error { border-color: var(--red); background: #fde; }
+        .fgroup input.error, .fgroup select.error, .fgroup textarea.error { border-color: var(--red); background: #fde; }
         .err { color: var(--red); font-size: 12px; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
         .factions { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
         .fnote { margin-top: 22px; font-size: 12px; opacity: .6; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ---- CHECKBOX GRID ---- */
+        .ckgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 20px; margin-top: 10px; }
+        .ck label { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 0; cursor: pointer; }
+        .ck input[type="checkbox"] {
+            width: 20px; height: 20px; accent-color: var(--blue);
+            border: 2px solid var(--ink); cursor: pointer;
+        }
 
         /* ---- PAGE FOOTER ---- */
         .pagefoot {
@@ -288,8 +297,9 @@
             <span class="code">REGISTER//01</span>
             <span class="brand">Daftar Siswa PKL</span>
             <nav class="topnav">
-                <a href="{{ route('siswa.index') }}" class="{{ request()->is('siswa*') && !request()->is('perusahaan*') ? 'active' : '' }}">Siswa</a>
+                <a href="{{ route('siswa.index') }}" class="{{ request()->is('siswa*') && !request()->is('perusahaan*') && !request()->is('kompetensi*') ? 'active' : '' }}">Siswa</a>
                 <a href="{{ route('perusahaan.index') }}" class="{{ request()->is('perusahaan*') ? 'active' : '' }}">Perusahaan</a>
+                <a href="{{ route('kompetensi.index') }}" class="{{ request()->is('kompetensi*') ? 'active' : '' }}">Kompetensi</a>
             </nav>
         </div>
     </div>

@@ -51,6 +51,16 @@
                         <td>{{ $siswa->tanggal_selesai }}</td>
                     </tr>
                     <tr>
+                        <td class="num">Kompetensi</td>
+                        <td>
+                            @forelse ($siswa->kompetensi as $kompetensi)
+                                <span class="badge badge-aktif">{{ $kompetensi->nama_kompetensi }}</span>
+                            @empty
+                                <span class="sub">Belum ada</span>
+                            @endforelse
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="num">Status</td>
                         <td><span class="badge badge-{{ $siswa->status }}">{{ $siswa->status }}</span></td>
                     </tr>
