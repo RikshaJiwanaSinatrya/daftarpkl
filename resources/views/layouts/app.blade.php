@@ -297,6 +297,7 @@
             <span class="code">REGISTER//01</span>
             <span class="brand">Daftar Siswa PKL</span>
             <nav class="topnav">
+                <a href="{{ route('dashboard') }}" class="{{ request()->is('/') ? 'active' : '' }}">Dashboard</a>
                 <a href="{{ route('siswa.index') }}" class="{{ request()->is('siswa*') && !request()->is('perusahaan*') && !request()->is('kompetensi*') ? 'active' : '' }}">Siswa</a>
                 <a href="{{ route('perusahaan.index') }}" class="{{ request()->is('perusahaan*') ? 'active' : '' }}">Perusahaan</a>
                 <a href="{{ route('kompetensi.index') }}" class="{{ request()->is('kompetensi*') ? 'active' : '' }}">Kompetensi</a>
