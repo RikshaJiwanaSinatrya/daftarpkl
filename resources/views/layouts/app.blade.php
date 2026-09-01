@@ -264,6 +264,16 @@
             font-size: 16px; font-weight: 700;
         }
 
+        /* ---- NAV ---- */
+        .topnav { display: flex; gap: 8px; flex-wrap: wrap; }
+        .topnav a {
+            font-family: "Space Mono", monospace;
+            font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--ink); background: var(--paper);
+            border: 2px solid var(--paper); padding: 6px 12px; text-decoration: none;
+        }
+        .topnav a:hover, .topnav a.active { background: var(--yellow); }
+
         @media (max-width: 720px) {
             .frow { grid-template-columns: 1fr; }
             .wrap { padding: 0 18px; }
@@ -277,7 +287,10 @@
         <div class="inner">
             <span class="code">REGISTER//01</span>
             <span class="brand">Daftar Siswa PKL</span>
-            <span class="code">TA 2026/2027</span>
+            <nav class="topnav">
+                <a href="{{ route('siswa.index') }}" class="{{ request()->is('siswa*') && !request()->is('perusahaan*') ? 'active' : '' }}">Siswa</a>
+                <a href="{{ route('perusahaan.index') }}" class="{{ request()->is('perusahaan*') ? 'active' : '' }}">Perusahaan</a>
+            </nav>
         </div>
     </div>
 
